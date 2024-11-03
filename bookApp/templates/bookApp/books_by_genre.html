@@ -1,0 +1,21 @@
+<h1>Books in {{ view.kwargs.genre_name }}</h1>
+<a href="{% url 'books:book_list' %}">Back to Book List</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>Book Title</th>
+            <th>Author</th>
+            <th>Publication Year</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for book in books %}
+        <tr>
+            <td>{{ book.title }}</td>
+            <td>{{ book.author.name }}</td>
+            <td>{{ book.publication_year }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

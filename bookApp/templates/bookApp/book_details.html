@@ -1,0 +1,19 @@
+<html>
+
+<head>
+    <title>{{ book.title }}</title>
+</head>
+
+<body>
+    <h1>{{ book.title }}</h1>
+    <p><strong>Author:</strong> {{ book.author.name }}</p>
+    <p><strong>Publication Year:</strong> {{ book.publication_year }}</p>
+    <p><strong>Genres:</strong>
+        {% for genre in book.genres.all %}
+        {{ genre.name }}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    </p>
+
+</body>
+
+</html>

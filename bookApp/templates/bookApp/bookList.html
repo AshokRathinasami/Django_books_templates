@@ -1,0 +1,41 @@
+<h1>Book List</h1>
+<a href="{% url 'books:add_book' %}">Add Book</a>
+<a href="{% url 'books:add_author' %}">Add Author</a>
+<a href="{% url 'books:add_genre' %}">Add Genre</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>s.No</th>
+            <th>Book Title</th>
+            <th>Author</th>
+            <th>Publication Year</th>
+            <th>Genres</th>
+            <th>Price</th> <!-- Add header for Price -->
+            <th>Discounted Price</th> <!-- Add header for Discounted Price -->
+            <th>Actions</th> <!-- Actions header for update/delete links -->
+        </tr>
+    </thead>
+    <tbody>
+        {% for book in books %}
+        <tr>
+            <td>{{ book.id }}</td>
+            <td>{{ book.title }}</td>
+            <td><a href="{% url 'books:books_by_author' book.author.id %}">{{ book.author.name }}</a></td>
+            <td><a href="{% url 'books:books_by_year' book.publication_year %}">{{ book.publication_year }}</a></td>
+            <td>
+                {% for genre in book.genres.all %}
+                <a href="{% url 'books:books_by_genre' genre.name %}">{{ genre.name }}</a>
+                {% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </td>
+            <td>{{ book.price }}</td> <!-- Display the price -->
+            <td>{{ book.discounted_price }}</td> <!-- Display the discounted price -->
+            <td>
+                <a href="{% url 'books:update_book' book.id %}">Update</a>
+                <a href="{% url 'books:delete_book' book.id %}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
